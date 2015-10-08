@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="accounting" default="archive">
+<project name="accounting" default="execute">
 
   <target name="init">
     <mkdir dir="build/classes"/>
@@ -13,7 +13,12 @@
 
   <target name="archive" depends="compile">
     <jar destfile="dist/accounting.jar"
-        basedir="build/classes"/>
+        basedir="build/classes"
+		includes="**/*.class">
+		<manifest> 
+			<attribute name="Main-Class" value="MainClass" />
+		</manifest>		
+	</jar>		
   </target>
 
   <target name="clean" depends="init">
@@ -21,4 +26,18 @@
     <delete dir="dist"/>
   </target>
 
+  <target name="execute" depends="compile">
+	<java classname="application.accounting.MainClass">
+		<classpath>
+			<pathelement path="build/classes"/>
+		</classpath>
+	</java>
+  </target>
+  
+  
+  <target name="execute-jar" depends="archive">
+	<java classpath="dist/accounting.jar"
+		classname="application.accounting.MainClass">
+	</java>  
+  </target>  
 </project>

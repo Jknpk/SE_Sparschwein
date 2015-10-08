@@ -10,6 +10,9 @@ public class MainClass{
 
 		//Sparer susanne = new Sparer(tryString);
 		
+		
+		//System.out.println(System.getProperty("user.dir"));
+		
 		Scanner sc = new Scanner(System.in);
 		
 		
@@ -22,7 +25,7 @@ public class MainClass{
 			String dateipfad = sc.next();
 			
 
-			if(dateipfad.equals("default")) dateipfad = "data/input.csv";
+			if(dateipfad.equals("default")) dateipfad = "src/data/input.csv";
 			try{
 			
 				Buchhaltung neuesBuch = new Buchhaltung(zinssatz, dateipfad);

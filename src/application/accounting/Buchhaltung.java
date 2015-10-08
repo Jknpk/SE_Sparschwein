@@ -34,7 +34,7 @@ public class Buchhaltung{
 		
 		
 		// Ausgabe Datei initialisieren
-		File ausgabeFile = new File("data/output.csv");
+		File ausgabeFile = new File("src/data/output.csv");
 		if(!(ausgabeFile.exists() && !ausgabeFile.isDirectory())) ausgabeFile.createNewFile();
 		writer = new PrintWriter(new FileWriter(ausgabeFile, false)); // false ueberschreibt Datei
 		
