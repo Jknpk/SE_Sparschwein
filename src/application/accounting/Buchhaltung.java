@@ -12,11 +12,13 @@ public class Buchhaltung{
 	
 	private double zinssatz;
 	private String inputData;
+	private String outputData;
 
-    public Buchhaltung(double zinssatz, String inputData) throws IOException{
+    public Buchhaltung(double zinssatz, String inputData, String outputData) throws IOException{
 
 		this.zinssatz = zinssatz;
 		this.inputData = inputData;
+		this.outputData = outputData;
 		
 		input();
 		
@@ -34,7 +36,7 @@ public class Buchhaltung{
 		
 		
 		// Ausgabe Datei initialisieren
-		File ausgabeFile = new File("src/data/output.csv");
+		File ausgabeFile = new File(outputData);
 		if(!(ausgabeFile.exists() && !ausgabeFile.isDirectory())) ausgabeFile.createNewFile();
 		writer = new PrintWriter(new FileWriter(ausgabeFile, false)); // false ueberschreibt Datei
 		
