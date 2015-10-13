@@ -14,8 +14,7 @@ public class MainClass{
 		//System.out.println(System.getProperty("user.dir"));
 		
 		Scanner sc = new Scanner(System.in);
-		
-		
+
 		
 		while(true){
 		

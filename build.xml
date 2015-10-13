@@ -34,6 +34,14 @@
 	</java>
   </target>
   
+   <target name="execute-input" depends="compile">
+	<java classname="application.accounting.MainClass" input="./accounting.in">
+		<classpath>
+			<pathelement path="build/classes"/>
+		</classpath>
+	</java>
+  </target>
+  
   
   <target name="execute-jar" depends="archive">
 	<java classpath="dist/accounting.jar"
