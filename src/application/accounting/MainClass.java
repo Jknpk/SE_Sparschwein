@@ -1,25 +1,57 @@
 package application.accounting;
 import java.util.Scanner;
 import java.io.IOException;
+import java.util.logging.*;
+
+
+
 public class MainClass{
 
+	protected static final Logger logger = Logger.getLogger(Buchhaltung.class.getName());
+	
+
+
 	public static void main(String[] args){
-
-
-		//String tryString = "025364;Adler;Susanne;287,34;24;2,13;167;24,2";
-
-		//Sparer susanne = new Sparer(tryString);
-		
-		
-		//System.out.println(System.getProperty("user.dir"));
+	  logger.setLevel(Level.ALL);
+	
+	  try{
+	    String log = parser.getLogger();
+	    boolean append = true;
+	    FileHandler fh = new FileHandler(log, append);
+	    fh.setFormatter(new Formatter() {
+	      public String format(LogRecord rec) {
+		StringBuffer buf = new StringBuffer(1000);
+		buf.append(new java.util.Date()).append(' ');
+		buf.append(rec.getLevel()).append(' ');
+		buf.append(formatMessage(rec)).append('\n');
+		return buf.toString();
+	      }
+	    
+	    });
+	  logger.addHandler(fh);
+	  	  
+	  } catch(IOException e){
+	    logger.severe("Datei kann nicht geschrieben werden");
+	    e.printStackTrace();
+	  
+	  }
+	  
+	  
+	  
+	  logger.warning("ICH WILL WAS SEHEN, TITEN AUF DEN TISCH, Butter am Fisch!");
+	  
+	  
+	
 		
 		if(args.length != 0){
 			ArgParser parser = new ArgParser(args);
 				try{
+						logger.info("lese von Datei: " + parser.getInputFilename());
 						Buchhaltung neuesBuch = new Buchhaltung(Double.parseDouble(parser.getNonOptions()), parser.getInputFilename(), parser.getOutputFilename());
 						System.out.println("done successfully");
 					}
 					catch(IOException e){
+						logger.severe("Alles scheisse, Leben hat kein Sinn mehr 1");
 						System.out.println("Parameter waren nicht korrekt!");
 					}	
 						
@@ -50,12 +82,13 @@ public class MainClass{
 				
 				
 				try{
-				
+					logger.info("lese von Datei: " + dateipfad_input);
 					Buchhaltung neuesBuch = new Buchhaltung(zinssatz, dateipfad_input, dateipfad_output);
 					System.out.println("done successfully");
 					break;
 				}
 				catch(IOException e){
+					logger.severe("Alles scheisse, Leben hat kein Sinn mehr 2");
 					System.out.println("Ihre Eingaben waren nicht Korrekt! Versuchen wir es erneut..");
 					continue;
 				}

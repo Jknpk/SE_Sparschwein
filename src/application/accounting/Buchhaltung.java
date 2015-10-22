@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.*;
 
 public class Buchhaltung{
 	
@@ -43,6 +44,7 @@ public class Buchhaltung{
 		String nextLine = "";
 		while(sc.hasNext()){
 			nextLine = sc.nextLine(); 
+			
 			try{
 				if(!(nextLine.charAt(0)==('#') || nextLine.charAt(0)==(' ') || nextLine.charAt(0)==('\n'))){
 					Sparer irgendjemand = new Sparer(nextLine, zinssatz);
@@ -51,6 +53,7 @@ public class Buchhaltung{
 				else{
 					writer.println(nextLine);				
 				}
+				MainClass.logger.info("gelesene Zeile: " + nextLine);
 			} catch(StringIndexOutOfBoundsException e){
 				writer.println("");
 			}

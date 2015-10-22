@@ -1,6 +1,7 @@
 # ausgeschlossene Dateien 
  
 output.csv
+log.txt
 
 # ausgeschlossene Verzeichnisse (endet mit "/")
 build/
