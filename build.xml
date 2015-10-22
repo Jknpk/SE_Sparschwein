@@ -45,7 +45,7 @@
   
   <target name="execute-params" depends="compile">
 	<java classname="application.accounting.MainClass">
-		<arg line="--input-file ./src/data/input.csv -o ./src/data/output.csv -l ./src/data/test.csv.log 5"/>
+		<arg line="--input-file ./src/data/input.csv -o ./src/data/output.csv -l ./log.txt 5"/>
 		<classpath>
 			<pathelement path="build/classes"/>
 		</classpath>
