@@ -50,6 +50,7 @@ public class MainClass{
 	while(true){
 		try{
 			logger.info("lese von Datei: " + eingabe.getLog());
+			System.out.println(eingabe.getZinssatz() + " " + eingabe.getInputData() + " " + eingabe.getOutputData());
 			Buchhaltung neuesBuch = new Buchhaltung(eingabe.getZinssatz(), eingabe.getInputData(), eingabe.getOutputData());
 			System.out.println("done successfully");
 			break;
