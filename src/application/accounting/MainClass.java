@@ -57,7 +57,7 @@ public class MainClass{
 		}
 		catch(IOException e){
 			logger.severe("Es ist wohl ein Fehler aufgetreten..");
-			System.out.println("Parameter waren nicht korrekt!");
+			System.out.println("Parameter waren nicht korrekt, erneuter Versuch mit manueller Eingabe...");
 			eingabe.tastaturEingabe();
 		}	
 	}
