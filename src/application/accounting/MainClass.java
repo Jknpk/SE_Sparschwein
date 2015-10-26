@@ -1,6 +1,10 @@
 package application.accounting;
 import java.io.IOException;
 import java.util.logging.*;
+import java.util.Locale;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+
 
 public class MainClass{
 	
@@ -8,11 +12,11 @@ public class MainClass{
 	protected static final Logger logger = Logger.getLogger(Buchhaltung.class.getName());
 	
 	public static void main(String[] args){
-	// Vorinitialisierung der Übergabe-Parameter
+	// Vorinitialisierung der Ueberbergabe-Parameter
 	
 	InputWerte eingabe = new InputWerte();
 	if(args.length != 0){
-	// Eingabe der Parameter erfolgt über XML-Datei
+	// Eingabe der Parameter erfolgt ueber XML-Datei	
 		ArgParser parser = new ArgParser(args);
 		eingabe.setZinssatz(Double.parseDouble(parser.getNonOptions()));
 		eingabe.setInputData(parser.getInputFilename());
@@ -20,7 +24,7 @@ public class MainClass{
 		eingabe.setLog(parser.getLogFilename());		
 	}
 	else{
-	// Eingabe der Parameter erfolgt über Tastatur
+	// Eingabe der Parameter erfolgt ueber Tastatur
 		eingabe.tastaturEingabe();
 	}
 
@@ -46,10 +50,13 @@ public class MainClass{
 		e.printStackTrace();
 	}
 	   
-	// Durchführung der Buchhaltung mit den gelesenen Parametern.   
+	// Durchfuehrung der Buchhaltung mit den gelesenen Parametern.
+	String baseName = "MainClass";
+	ResourceBundle rb = ResourceBundle.getBundle(baseName);  
 	while(true){
 		try{
-			logger.info("lese von Datei: " + eingabe.getLog());
+			String readinput_msg = rb.getString("readinput_msg");
+			logger.info(readinput_msg + " " + eingabe.getLog());
 			System.out.println(eingabe.getZinssatz() + " " + eingabe.getInputData() + " " + eingabe.getOutputData());
 			Buchhaltung neuesBuch = new Buchhaltung(eingabe.getZinssatz(), eingabe.getInputData(), eingabe.getOutputData());
 			System.out.println("done successfully");
