@@ -7,7 +7,7 @@
     <mkdir dir="dist"/>
   </target>
 
-  <target name="compile" depends="init">
+  <target name="compile" depends="init, create-language-links">
     <javac includeAntRuntime="false" srcdir="src" destdir="build/classes" debug="true" debuglevel="lines,vars,source"/>
   </target>
 
@@ -21,7 +21,7 @@
 	</jar>		
   </target>
 
-  <target name="clean" depends="init">
+  <target name="clean" depends="init, delete-dirs-carefully">
     <delete dir="build"/>
     <delete dir="dist"/>
   </target>
@@ -58,6 +58,50 @@
 		classname="application.accounting.MainClass">
 	</java>  
   </target>  
+  
+  
+  
+  
+  <target name="create-dirs">
+    <mkdir dir="build/classes/package/de"/>
+    <mkdir dir="dist/data"/>
+  </target>
+
+  <target name="test-set-language-links" depends="create-dirs">
+    <condition property="isNotALangDir">
+      <not>
+	<available file="./dist/data/lang" type="dir" />
+      </not>
+    </condition>
+  </target>
+  
+  <target name="create-language-links" depends="test-set-language-links" if="isNotALangDir">
+    <exec executable="ln" error="/dev/null" os="Linux">
+      <arg line="-sn" />
+      <arg file="./src/data/lang" />
+      <arg file="./dist/data/lang" />
+    </exec>
+  </target>
+  
+  
+  <target name="delete-dirs-carefully" depends="delete-language-links">
+    <delete dir="build"/>
+    <delete dir="dist" />
+  </target>
+  
+  <target name="test-remove-language-links">
+    <condition property="isADir">
+      <available file="./dist/data/lang" type="dir" />
+    </condition>
+  </target>
+  
+  <target name="delete-language-links" depends="test-remove-language-links" if="isADir">
+    <exec executable="rm" eror="/dev/null" os="Linux">
+      <arg file="./dist/data/lang" />
+    </exec>
+  </target>
+  
+  
 </project>
 
 
