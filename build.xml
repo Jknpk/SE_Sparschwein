@@ -2,13 +2,25 @@
 
 <project name="accounting" default="execute">
 
+  <path id="project.class.path">
+    <pathelement path="./build/classes"/>
+    <pathelement path="./dist/data/lang" />
+  </path>
+  
+   <path id="project.class.path2">
+    <pathelement path="./dist/data/lang"/>
+    <pathelement path="./dist/accounting.jar" />
+  </path>
+    
   <target name="init">
     <mkdir dir="build/classes"/>
     <mkdir dir="dist"/>
   </target>
 
   <target name="compile" depends="init, create-language-links">
-    <javac includeAntRuntime="false" srcdir="src" destdir="build/classes" debug="true" debuglevel="lines,vars,source"/>
+    <javac includeAntRuntime="false" srcdir="src" destdir="build/classes" debug="true" debuglevel="lines,vars,source">
+      <classpath refid="project.class.path"/>
+    </javac>  
   </target>
 
   <target name="archive" depends="compile">
@@ -28,17 +40,13 @@
 
   <target name="execute" depends="compile">
 	<java classname="application.accounting.MainClass">
-		<classpath>
-			<pathelement path="build/classes"/>
-		</classpath>
+	  <classpath refid="project.class.path"/>
 	</java>
   </target>
   
    <target name="execute-input" depends="compile">
 	<java classname="application.accounting.MainClass" input="./accounting.in">
-		<classpath>
-			<pathelement path="build/classes"/>
-		</classpath>
+	  <classpath refid="project.class.path"/>
 	</java>
   </target>
   
@@ -46,17 +54,13 @@
   <target name="execute-params" depends="compile">
 	<java classname="application.accounting.MainClass">
 		<arg line="--input-file ./src/data/input.csv -o ./src/data/output.csv -l ./log.txt 5"/>
-		<classpath>
-			<pathelement path="build/classes"/>
-		</classpath>
+	  <classpath refid="project.class.path"/>
 	</java>
   </target>
   
   
   <target name="execute-jar" depends="archive">
-	<java classpath="dist/accounting.jar"
-		classname="application.accounting.MainClass">
-	</java>  
+	<java classpath="project.class.path2" classname="application.accounting.MainClass"/>
   </target>  
   
   
