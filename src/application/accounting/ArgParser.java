@@ -16,7 +16,6 @@ public class ArgParser {
         
     } // end of special constructor "ArgParser(String[])"
 
-    // Kajo, bauen!
     private void parseArgs() {
 
         StringBuffer sb = null;
