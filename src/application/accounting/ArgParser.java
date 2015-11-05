@@ -1,5 +1,4 @@
 package application.accounting;
-// Kajo baut hier..lasst ihn Ruhe
 public class ArgParser {
 
     private String[] args = null;
