@@ -56,7 +56,7 @@ public class MainClass{
 	while(true){
 		try{
 			String readinput_msg = rb.getString("readinput_msg");
-			logger.info(readinput_msg + " " + eingabe.getLog());
+			logger.info(readinput_msg + " " + eingabe.getInputData());
 			System.out.println(eingabe.getZinssatz() + " " + eingabe.getInputData() + " " + eingabe.getOutputData());
 			Buchhaltung neuesBuch = new Buchhaltung(eingabe.getZinssatz(), eingabe.getInputData(), eingabe.getOutputData());
 			System.out.println("done successfully");
