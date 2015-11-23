@@ -58,8 +58,7 @@ public class MainClass{
 	String baseName = "MainClass";
 	
 	
-	File file = new File("dist/data/lang/");
-	System.out.println(file.getAbsolutePath());
+	File file = new File("/home/se417503/SE/uebung5/projects/accounting/dist/data/lang/");
 	ResourceBundle rb = null;
 	try{
 	  URL[] urls = {file.toURI().toURL()};
