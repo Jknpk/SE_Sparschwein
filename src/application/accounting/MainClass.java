@@ -4,6 +4,10 @@ import java.util.logging.*;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.io.File;
 
 
 public class MainClass{
@@ -52,7 +56,22 @@ public class MainClass{
 	   
 	// Durchfuehrung der Buchhaltung mit den gelesenen Parametern.
 	String baseName = "MainClass";
-	ResourceBundle rb = ResourceBundle.getBundle(baseName);  
+	
+	
+	File file = new File("dist/data/lang/");
+	System.out.println(file.getAbsolutePath());
+	ResourceBundle rb = null;
+	try{
+	  URL[] urls = {file.toURI().toURL()};
+	  ClassLoader loader = new URLClassLoader(urls);
+	  rb = ResourceBundle.getBundle(baseName, Locale.getDefault(), loader);
+	}
+	catch(MalformedURLException e){
+	  e.printStackTrace();	
+	}
+	
+	
+	
 	while(true){
 		try{
 			String readinput_msg = rb.getString("readinput_msg");

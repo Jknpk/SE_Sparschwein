@@ -12,6 +12,13 @@
     <pathelement path="./dist/accounting.jar" />
   </path>
     
+    
+    <tstamp>
+      <format property="timestamp.isoformat" pattern="yyyy-MM-dd'T'HH:mm:ss" locale="de" />
+    </tstamp>  
+      
+    
+    
   <target name="init">
     <mkdir dir="build/classes"/>
     <mkdir dir="dist"/>
@@ -21,12 +28,27 @@
     <javac includeAntRuntime="false" srcdir="./src" destdir="build/classes" debug="true" debuglevel="lines,vars,source"/>
   </target>
 
+  
+  <target name="create-manifest" depends="init">
+    <manifest file="./dist/data/MANIFEST.MF">
+      <attribute name = "Built-By" value="Jannis Konopka"/>
+      <attribute name = "Built-On" value="${timestamp.isoformat}"/>
+      <attribute name = "Main-Class" value="application.accounting.MainClass"/>
+    </manifest>
+  </target>
+  
+  <target name="archive-application" depends="compile, create-manifest" description="Creates a Java archive of an executable program">
+    <jar destfile="dist/application-app.jar" basedir="./build/classes" excludes="**/package/*, **/testcases/*" manifest="./dist/data/MANIFEST.MF" />
+    <!-- copy file="src/data/" todir="dist/data"/> -->
+  </target>
+  
+  
   <target name="archive" depends="compile">
     <jar destfile="dist/accounting.jar"
         basedir="build/classes"
 		includes="**/*.class">
 		<manifest> 
-			<attribute name="Main-Class" value="MainClass" />
+			<attribute name="MainClass" value="MainClass" />
 		</manifest>		
 	</jar>		
   </target>
